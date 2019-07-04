@@ -15,13 +15,13 @@ function ExtractDataFromNode(count, node)
 	}
 			
 		//ignore things that end with " Demo"
-	if (kids[i].textContent.trim().endsWith(" Demo"))
+	if (kids[i].textContent.trim().endsWith(" "+locale.demo))
 	{
 		//It's a demo, ignore
 	   return null;
 	}
 	
-	if (kids[i].textContent.trim().endsWith(" Costume"))
+	if (kids[i].textContent.trim().endsWith(" "+locale.costume))
 	{
 	   return null;
 	}
@@ -30,7 +30,7 @@ function ExtractDataFromNode(count, node)
 		{
 			var stuff = kids[i].textContent.split("|");
 		 
-		  if (stuff[0].trim() != "Game")
+		  if (stuff[0].trim() != locale.game)
 		  {
 		  	//umm.. it's probably a demo or addon, ignore this
 		   return null;
@@ -42,12 +42,12 @@ function ExtractDataFromNode(count, node)
   		gameItem.Size = stuff[1].trim();
   		gameItem.PurchaseDate = stuff[2].split("\n")[0].trim();
     
-		  if (stuff[2].includes("Playable On:"))
+		  if (stuff[2].includes(locale.playable))
 		  {
-		  	consoles = stuff[2].split("Playable On:\n")[1].trim();
+		  	consoles = stuff[2].split(locale.playable + "\n")[1].trim();
 		  } else
 		  {
-		   	consoles = stuff[3].split("Playable On:\n")[1].trim();
+		   	consoles = stuff[3].split(locale.playable + "\n")[1].trim();
 		  }
 
 		  consoles = consoles.split("\n");
@@ -101,6 +101,41 @@ function GetGames()
 	window.jsonObject= {};
   window.jsonObject.games=[];
 
+  // Locale detection
+  var locales = [
+	{
+		lang: "en-us",
+		demo: "Demo",
+		costume: "Costume",
+		game: "Game",
+		playable: "Playable On:"
+	},
+	{
+		lang: "ru-ru",
+		demo: "Демоверсия",
+		costume: "Аватар",
+		game: "Игра",
+		playable: "Совместимые системы:"
+	}
+	// add more?
+]
+
+locale = null;
+
+for (var i = 0; i < locales.length; i++) {
+	if (window.location.href.includes(locales[i].lang)) {
+		locale = locales[i];
+		break;
+	}
+}
+
+if (locale == null) {
+	alert("Couldn't figure out locale, aborting.");
+	return;
+}
+// If control isn't found, pop-up closes and we don't get to see the results, even if they're generated.
+// Therefore, screw this thing.
+/*
 		startButton = document.getElementsByClassName('paginator-control__beginning paginator-control__arrow-navigation');
 	  if (startButton != null && startButton.length > 0)
 	  {
@@ -108,7 +143,8 @@ function GetGames()
 	  } else
 	 	{
 	     alert("It looks like you aren't on the right page ( https://store.playstation.com/en-us/download/list ) or you aren't logged on.  Or the HTML changed and this doesn't work anymore.");		
-	 	}
+		 }
+		 */
 	
 	do 
 	{
