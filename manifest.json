@@ -1,0 +1,24 @@
+{
+	"manifest_version": 2,
+
+	"name": "RT Playstation Game Data Scraper",
+	"description": "Grabs your playstation purchase list and formats it as json data.",
+	"version": "1.0",
+	"author": "@rtsoft",
+
+
+	"background": {
+		"scripts": ["popup.js"],
+		"persistent": true
+	},
+
+	"permissions": [
+        "tabs",
+        "http://*/",
+        "https://*/"
+    ],
+	"browser_action": {
+		"default_icon": "logo.png",
+		"default_popup": "popup.html"
+	}
+}
