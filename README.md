@@ -49,3 +49,5 @@ I probably won't work on this anymore but here are some issues/problems with it 
 * Instead of using alert() to show progress it should have a nice status window while working
 * It's very likely to break given the methods it uses to parse data, web scraping in general sucks, but I don't know another way to get this info
 * Should also be gathering data from online trophies, this method could detect more games that you own.  Current method doesn't know about games you've played via real disc
+
+Some more info in this forum thread: https://www.rtsoft.com/forums/showthread.php?355110-Anybody-have-a-Playstation-account-and-want-to-help-me-test-a-chrome-extension
